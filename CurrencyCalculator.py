@@ -8,6 +8,7 @@ def error():
 def check():
     
     txt2= ent2.get("1.0",'end').replace("\n", "")
+    txt2=txt2.replace(" ", "")
     for i in range(len(txt2)):
       if txt2[i] == '$':
 
@@ -16,7 +17,7 @@ def check():
         except:
           x=''
 
-        if x =='$':
+        if x =='$' or x in string.digits+'.':
               error()
               return False
               
@@ -27,7 +28,9 @@ def check():
 
     else:
       txt= ent.get()
+      txt=txt.replace(" ", "")
       if not any(i not in string.digits+'. ' for i in txt):
+          
           return txt2
       else:
         error()
@@ -40,6 +43,8 @@ def cl():
   if validate != False:
 
     txt=ent.get()
+    if len(txt)==0:
+            txt='1'
     txt2=validate.replace('$','*'+txt)
     result= round(float(eval(txt2)),2)
     ent3.delete(0,"end")
@@ -53,6 +58,8 @@ def cf():
   if validate != False:
 
     txt=ent.get()
+    if len(txt)==0:
+            txt='1'
     txt2=validate.replace('$','*'+txt)
     result= eval(txt2)
     result=round(result/float(txt),2)
